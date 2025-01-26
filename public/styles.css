@@ -1,0 +1,81 @@
+.chat-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.chat-message {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.chat-message.own {
+    background-color: #007bff;
+    color: white;
+    margin-left: 20%;
+}
+
+.chat-message.other {
+    background-color: #f8f9fa;
+    margin-right: 20%;
+}
+
+.document-item, .file-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.document-item:hover, .file-item:hover {
+    background-color: #f8f9fa;
+}
+
+#document-content {
+    resize: vertical;
+    min-height: 300px;
+}
+
+#file-content {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#image-preview, #pdf-preview {
+    max-width: 100%;
+    max-height: 70vh;
+}
+
+.file-item i {
+    margin-right: 8px;
+}
+
+#pdf-controls {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+#page-info {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.workspace-section {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+}

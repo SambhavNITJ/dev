@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+</head>
+<body>
+    <div class="container-fluid mt-4">
+        <!-- Login Section -->
+        <div id="login-section">
+            <h2 class="text-center mb-4">Collaborative Docs</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="d-grid gap-3">
+                        <button id="create-room-btn" class="btn btn-primary">Create New Room</button>
+                        <div class="input-group">
+                            <input type="text" id="room-code-input" class="form-control" placeholder="Enter Room Code">
+                            <button id="join-room-btn" class="btn btn-success">Join Room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Workspace -->
+        <div id="workspace" class="d-none">
+            <div class="row">
+                <!-- Left Panel - Documents and Files -->
+                <div class="col-md-3">
+                    <!-- Documents Section -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3>Documents</h3>
+                            <button id="create-doc-btn" class="btn btn-primary btn-sm">New Document</button>
+                        </div>
+                        <div id="documents-list" class="list-group mt-3"></div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                    <div class="mb-3">
+                        <h3>Files</h3>
+                        <form id="upload-form" class="mb-2">
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="file-input" accept="image/*,application/pdf">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+                        <div id="files-list" class="list-group"></div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="col-md-6">
+                    <!-- Document Editor -->
+                    <div id="document-editor" class="d-none">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 id="current-doc-name"></h4>
+                            <button id="back-to-docs" class="btn btn-secondary">Back</button>
+                        </div>
+                        <textarea id="document-content" class="form-control" rows="15"></textarea>
+                    </div>
+
+                    <!-- File Viewer -->
+                    <div id="file-viewer" class="d-none">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 id="current-file-name"></h4>
+                            <button id="back-to-files" class="btn btn-secondary">Back</button>
+                        </div>
+                        <div id="file-content" class="border rounded p-2">
+                            <img id="image-preview" class="img-fluid d-none" alt="Preview">
+                            <canvas id="pdf-preview" class="d-none"></canvas>
+                            <div id="pdf-controls" class="d-none mt-2">
+                                <button id="prev-page" class="btn btn-sm btn-secondary">Previous</button>
+                                <span id="page-info" class="mx-2">Page <span id="page-num"></span> of <span id="page-count"></span></span>
+                                <button id="next-page" class="btn btn-sm btn-secondary">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Chat -->
+                <div class="col-md-3">
+                    <div class="chat-container">
+                        <h3>Chat</h3>
+                        <div id="chat-messages" class="chat-messages"></div>
+                        <div class="input-group mt-3">
+                            <input type="text" id="chat-input" class="form-control" placeholder="Type a message...">
+                            <button id="send-message-btn" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
